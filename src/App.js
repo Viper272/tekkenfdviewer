@@ -1,13 +1,9 @@
-import './App.css';
-
 import React, { createRef } from 'react';
 import {StyleSheet, View, useWindowDimensions} from 'react-native-web';
 import {ReactNativeZoomableView} from '@openspacelabs/react-native-zoomable-view';//src/ReactNativeZoomableView';
 
 import MoveComponent from './components/MoveComponent';
 let zoomableViewRef;
-
-
 
 class TekkenMove {
     
@@ -32,31 +28,32 @@ function App() {
 
   return (
     <View style={styles.container} onWheel={(e) => {setScroll(e)}}>
-      <View style={{flex: 1, width: '100%', backgroundColor: 'gray'}}>
         <ReactNativeZoomableView  
           ref={zoomableViewRef}
         
-          contentHeight={height * 2}
-          contentWidth={width * 2}
+          contentHeight={height}
+          contentWidth={width}
 
           maxZoom={2}
           minZoom={0.5}
 
           initialZoom={1}
 
-          style={{backgroundColor: 'green'}}
+          style={[styles.moveView, {backgroundColor:'darkgray'}]}
         >
-          <MoveComponent
-            tMove={new TekkenMove("Memai Tsuki", 1, "High")}
-            xPos={100}
-            //yPos={100}
-          />
-          <MoveComponent
-            tMove={new TekkenMove("Memai Tsuki 2", 2, "Middle")}
-          />
+          <View style={[styles.moveViewColumn, {backgroundColor:'darkred'}]}>  
+            <MoveComponent tMove={new TekkenMove("Memai Tsuki", 1, "High")}/>
+          </View>
+          <View style={[styles.moveViewColumn, {backgroundColor:'green'}]}>  
+            <MoveComponent tMove={new TekkenMove("Memai Tsuki 2", 2, "Middle")}/>
+            <MoveComponent tMove={new TekkenMove("One-Two Punch", 2, "High")}/>
+          </View>
+          <View style={[styles.moveViewColumn, {backgroundColor:'darkblue'}]}>  
+            <MoveComponent tMove={new TekkenMove("Ryu Enko", 3, "Middle")}/>
+            <View style={styles.moveViewBlank}/>
+          </View>
         </ReactNativeZoomableView>
       </View>
-    </View>
   );
 }
 
@@ -73,11 +70,24 @@ function setScroll(eventArgs) {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    right: 0,
-    bottom: 0,
+    flex: 1,
+    height: '100vh'
+  },
+  moveView: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    //alignItems: 'center',
+  },
+  moveViewColumn: {
+    flex: 1,
+    height: '100%',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  moveViewBlank: {
+    height: 100
   }
 })
 

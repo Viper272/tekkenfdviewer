@@ -8,15 +8,11 @@ import {
 
 
 function MoveComponent({tMove, xPos, yPos}) {
-    //let tMove = new TekkenMove("Memai Tsuki", 1, "High");
-
     return (
-        <View style={{position: 'absolute', left: xPos, top: yPos}}>
-            <View style={styles.background}>
-                <Text>Move: {tMove.Name}</Text>
-                <Text>Hits: {tMove.HitCount}</Text>
-                <Text>Location: {tMove.HitLocation}</Text>
-            </View>
+        <View style={styles.background}>
+            <Text>Move: {tMove.Name}</Text>
+            <Text>Hits: {tMove.HitCount}</Text>
+            <Text>Location: {tMove.HitLocation}</Text>
         </View>
     );
 }
